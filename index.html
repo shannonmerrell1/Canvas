@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Drawing Area</title>
+
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+		<!-- style='height: 80%; width: 80%;' -->
+    <canvas id = "myCanvas"></canvas>
+    <!-- <input type = "color" id = "picker"/> -->
+
+<script>
+
+var myCanvas = document.getElementById("myCanvas");
+var ctx = myCanvas.getContext("2d");
+
+document.getElementById('myCanvas').width = window.innerWidth * 0.80;
+document.getElementById('myCanvas').height = window.innerHeight * 0.80;
+
+function draw(x, y){
+	 ctx.beginPath();
+	 ctx.arc( x, y, 10, 0, 2 * Math.PI)
+	 ctx.fill();
+}
+
+var penDown = true
+myCanvas.addEventListener('mousemove', function(e){
+		console.log(e);
+
+			if (penDown==true)
+				draw(e.x, e.y);
+
+		// y = layerY
+		// draw( x, )
+})
+document.body.addEventListener('keydown', function(e){
+	console.log(e.keyCode);
+	switch (e.keyCode){
+		case 71: // or case 'g'?
+			ctx.fillStyle= 'green';
+			break;
+		case 66:
+			ctx.fillStyle = "blue";
+			break;
+		case 82:
+			ctx.fillStyle = "red";
+			break;
+		case 89:
+			ctx.fillStyle = "yellow";
+			break;
+		case 38:
+			penDown = false;
+			break;
+		case 40:
+			penDown = true;
+			break;
+		case 32:
+			ctx.clearRect( 0, 0, myCanvas.width, myCanvas.height);
+			break;
+
+	}
+})
+</script>
+</body>
+</html>
